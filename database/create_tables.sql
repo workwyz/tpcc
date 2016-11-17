@@ -13,6 +13,7 @@ w_state char(2),
 w_zip char(9), 
 w_tax decimal(4,2), 
 w_ytd decimal(12,2),
+route_id INT(11) NOT NULL,
 primary key (w_id) ) Engine=InnoDB;
 
 drop table if exists district;
@@ -29,6 +30,7 @@ d_zip char(9),
 d_tax decimal(4,2), 
 d_ytd decimal(12,2), 
 d_next_o_id int,
+route_id INT(11) NOT NULL,
 primary key (d_w_id, d_id) ) Engine=InnoDB;
 
 drop table if exists customer;
@@ -55,6 +57,7 @@ c_ytd_payment decimal(12,2),
 c_payment_cnt smallint, 
 c_delivery_cnt smallint, 
 c_data text,
+route_id INT(11) NOT NULL,
 PRIMARY KEY(c_w_id, c_d_id, c_id) ) Engine=InnoDB;
 
 drop table if exists history;
@@ -67,6 +70,7 @@ h_d_id tinyint,
 h_w_id smallint,
 h_date datetime,
 h_amount decimal(6,2), 
+route_id INT(11) NOT NULL,
 h_data varchar(24) ) Engine=InnoDB;
 
 drop table if exists new_orders;
@@ -75,6 +79,7 @@ create table new_orders (
 no_o_id int not null,
 no_d_id tinyint not null,
 no_w_id smallint not null,
+route_id INT(11) NOT NULL,
 PRIMARY KEY(no_w_id, no_d_id, no_o_id)) Engine=InnoDB;
 
 drop table if exists orders;
@@ -88,6 +93,7 @@ o_entry_d datetime,
 o_carrier_id tinyint,
 o_ol_cnt tinyint, 
 o_all_local tinyint,
+route_id INT(11) NOT NULL,
 PRIMARY KEY(o_w_id, o_d_id, o_id) ) Engine=InnoDB ;
 
 drop table if exists order_line;
@@ -103,6 +109,7 @@ ol_delivery_d datetime,
 ol_quantity tinyint, 
 ol_amount decimal(6,2), 
 ol_dist_info char(24),
+route_id INT(11) NOT NULL,
 PRIMARY KEY(ol_w_id, ol_d_id, ol_o_id, ol_number) ) Engine=InnoDB ;
 
 drop table if exists item;
@@ -113,6 +120,7 @@ i_im_id int,
 i_name varchar(24), 
 i_price decimal(5,2), 
 i_data varchar(50),
+route_id INT(11) NOT NULL,
 PRIMARY KEY(i_id) ) Engine=InnoDB;
 
 drop table if exists stock;
@@ -135,6 +143,7 @@ s_ytd decimal(8,0),
 s_order_cnt smallint, 
 s_remote_cnt smallint,
 s_data varchar(50),
+route_id INT(11) NOT NULL,
 PRIMARY KEY(s_w_id, s_i_id) ) Engine=InnoDB ;
 
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
